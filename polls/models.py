@@ -10,7 +10,7 @@ class Question(models.Model):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
-    was_published_recently.short_description = 'Published recently?'	
+    was_published_recently.short_description = 'Published recently?'
 
 class Choice(models.Model):
     question = models.ForeignKey(Question)
@@ -18,4 +18,10 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
         return self.choice_text
-    
+
+class Newsletter(models.Model):
+    email = models.EmailField()
+    full_name = models.CharField(max_length=200);
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    def __str__(self):
+        return self.email
